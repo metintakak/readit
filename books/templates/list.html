@@ -1,24 +1,9 @@
+{% extends "base.html" %}
 {% load humanize %}
-<html>
-  <head>
-      <title>My first django html page</title>
-  </head>
-  <body>
-      <div>Hello, this is my first list page.</div>
-      {% if request.user.is_authenticated %}
-          <p>Hello  {{request.user.username|title}}. You last logged in at {{request.user.last_login|date:"D d M Y"}} </p>
-      {% else %}
-            <p>Hello Guest!  </p>
-      {% endif %}
+{% block content %}
+  <h1>{{ books.count|apnumber|title }} book{{ books.count|pluralize }}</h1>
 
-      <main>
-          <h1>{{books.count|apnumber|title}} book{{books.count|pluralize}}</h1>
-          {% for book in books %}
-            <h2>{{book.title}} by {{book.list_authors}} </h2>
-            {% if book.is_favoriote %}
-              <span class="highlight">favorite</span>
-            {% endif %}
-          {% endfor %}
-      </main>
-  </body>
-</html>
+      {% for book in books %}
+        {% include "book-detail.html" %}
+      {% endfor %}
+{% endblock %}

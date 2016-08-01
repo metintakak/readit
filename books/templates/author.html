@@ -1,13 +1,10 @@
-<html>
-  <head>
-      <title>An author</title>
-  </head>
-  <body>
+{% extends "base.html" %}
+{% block content %}
       {{author.name}}
       {% for book in author.books.all %}
         {% if book.review %}
             <div class="book">
-                <h3>{{book.title}}</h3>
+                <h3> <a href = "{% url 'book-detail' book.pk %}">  {{book.title}}</a></h3>
                 <p>
                   {% if book.is_favoriote%}
                       <p class="highlight"> favorite </p>
@@ -17,5 +14,4 @@
             </div>
           {% endif %}
     {% endfor %}
-  </body>
-</html>
+{% endblock %}
