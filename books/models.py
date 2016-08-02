@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.timezone import now
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 class Book(models.Model):
@@ -26,3 +27,6 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('author-detail', kwargs={'pk',self.pk});
